@@ -45,5 +45,15 @@ public class RacoonMove : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
             model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
+
+        if (_grab.IsPressed())
+        {
+            Debug.Log("Grab");
+        }
+
+        if (_swipe.IsPressed())
+        {
+            Debug.Log("Swipe");
+        }
     }
 }
