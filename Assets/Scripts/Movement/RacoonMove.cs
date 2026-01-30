@@ -12,7 +12,6 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private InputActionAsset playerActions;
     
-    [SerializeField] private Transform forward;
     [SerializeField] private float speed = 1f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -21,11 +20,6 @@ public class RacoonMove : MonoBehaviour
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
-        }
-
-        if (forward == null)
-        {
-            Debug.LogError("Where's my transform forward bitch!");
         }
         
         _move = playerActions.FindAction("Player/Move");
