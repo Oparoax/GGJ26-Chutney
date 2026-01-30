@@ -3,14 +3,14 @@ using UnityEngine.InputSystem;
 
 public class RacoonMove : MonoBehaviour
 {
-    private Rigidbody _rb;
-    
     // Input actions
     private InputAction _move;
     private InputAction _grab;
     private InputAction _swipe;
-
-    [SerializeField] private InputActionMap playerActions;
+    
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject model;
+    [SerializeField] private InputActionAsset playerActions;
     
     [SerializeField] private Transform forward;
     [SerializeField] private float speed = 1f;
@@ -18,9 +18,9 @@ public class RacoonMove : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (_rb == null)
+        if (rb == null)
         {
-            _rb = GetComponent<Rigidbody>();
+            rb = GetComponent<Rigidbody>();
         }
 
         if (forward == null)
@@ -28,9 +28,9 @@ public class RacoonMove : MonoBehaviour
             Debug.LogError("Where's my transform forward bitch!");
         }
         
-        _move = playerActions.FindAction("Move");
-        _grab = playerActions.FindAction("Grab");
-        _swipe = playerActions.FindAction("Swipe");
+        _move = playerActions.FindAction("Player/Move");
+        _grab = playerActions.FindAction("Player/Grab");
+        _swipe = playerActions.FindAction("Player/Swipe");
 
         if (_move == null || _grab == null || _swipe == null)
         {
@@ -41,9 +41,15 @@ public class RacoonMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_move.triggered)
+        if (_move.IsPressed())
         {
-            _rb.AddForce(_move.ReadValue<Vector2>().normalized * speed, ForceMode.Impulse);
+            Vector2 inputValue = _move.ReadValue<Vector2>();
+            Vector3 direction = new Vector3(inputValue.x, 0, inputValue.y);
+            
+            rb.AddForce(direction.normalized * speed, ForceMode.Impulse);
+            
+            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
+            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * 5f);
         }
     }
 }

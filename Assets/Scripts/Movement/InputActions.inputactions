@@ -36,7 +36,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Forward",
+                    "name": "Keyboard",
                     "id": "ae6c0a3f-0a5d-43b9-86c9-82fd58b3d76f",
                     "path": "2DVector",
                     "interactions": "",
