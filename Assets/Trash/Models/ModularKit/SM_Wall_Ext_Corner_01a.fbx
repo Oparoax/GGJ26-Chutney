@@ -10,9 +10,9 @@ FBXHeaderExtension:  {
 		Month: 1
 		Day: 30
 		Hour: 19
-		Minute: 49
-		Second: 32
-		Millisecond: 900
+		Minute: 52
+		Second: 10
+		Millisecond: 676
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.9"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -34,13 +34,13 @@ FBXHeaderExtension:  {
 			P: "Original|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "Original|ApplicationName", "KString", "", "", "Maya"
 			P: "Original|ApplicationVersion", "KString", "", "", "2026"
-			P: "Original|DateTime_GMT", "DateTime", "", "", "30/01/2026 19:49:32.899"
+			P: "Original|DateTime_GMT", "DateTime", "", "", "30/01/2026 19:52:10.674"
 			P: "Original|FileName", "KString", "", "", "E:\GGJ26\GGJ26-Chutney\Assets\Trash\Models\ModularKit\SM_Wall_Ext_Corner_01a.fbx"
 			P: "LastSaved", "Compound", "", ""
 			P: "LastSaved|ApplicationVendor", "KString", "", "", "Autodesk"
 			P: "LastSaved|ApplicationName", "KString", "", "", "Maya"
 			P: "LastSaved|ApplicationVersion", "KString", "", "", "2026"
-			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "30/01/2026 19:49:32.899"
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", "30/01/2026 19:52:10.674"
 			P: "Original|ApplicationActiveProject", "KString", "", "", "E:\GGJ26\GGJ26-Chutney\Assets\Trash\Models"
 			P: "Original|ApplicationNativeFile", "KString", "", "", "C:\Users\tc308870\OneDrive - Falmouth University\Documents\maya\projects\default\scenes\racoonkit.ma"
 		}
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 2687237013872, "", "Scene" {
+	Document: 2684023532768, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
@@ -235,7 +235,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 2687229969824, "Geometry::", "Mesh" {
+	Geometry: 2687331198944, "Geometry::", "Mesh" {
 		Vertices: *120 {
 			a: 0,-3.99351119995117e-06,200,0,-3.99351119995117e-06,0,0,300,200,0,300,0,0,-3.99351119995117e-06,100.000061035156,0,300,100.000061035156,0,99.9999008178711,200,0,199.999954223633,200,200,-3.99351119995117e-06,0,200,300,0,100.000061035156,-3.99351119995117e-06,0,100.000061035156,300,0,200,99.9999008178711,0,200,199.999954223633,0,-15,-3.99351119995117e-06,100.000061035156,-15,99.9999008178711,100.000061035156,-15,-3.99351119995117e-06,200,-15,99.9999008178711,200,-15,-3.99351119995117e-06,-15,-15,99.9999008178711,-15,-15,199.999954223633,-15,-15,199.999954223633,100.000061035156,-15,199.999954223633,200,-15,300,-15,-15,300,100.000061035156,-15,300,200,100.000061035156,99.9999008178711,-15,200,99.9999008178711,-15,200,-3.99351119995117e-06,-15,100.000061035156,-3.99351119995117e-06,-15,100.000061035156,199.999954223633,-15,200,199.999954223633,-15,100.000061035156,300,-15,200,300,-15,0,199.999984741211,100.000061035156,0,199.999984741211,0,100.000061035156,199.999984741211,0,0,99.9999923706055,100.000061035156,0,99.9999923706055,0,100.000061035156,99.9999923706055,0
 		} 
@@ -345,7 +345,7 @@ Objects:  {
 			}
 		}
 	}
-	Model: 2685953245952, "Model::Wall_Ext_Corner_01a", "Mesh" {
+	Model: 2685953436192, "Model::Wall_Ext_Corner_01a", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
@@ -357,7 +357,7 @@ Objects:  {
 		Shading: T
 		Culling: "CullingOff"
 	}
-	Material: 2686910128048, "Material::openPBR_shader1", "" {
+	Material: 2686915511440, "Material::openPBR_shader1", "" {
 		Version: 102
 		ShadingModel: "openpbrsurface"
 		MultiLayer: 0
@@ -410,7 +410,7 @@ Objects:  {
 			P: "Maya|normalCameraFactor", "double", "Number", "",0
 		}
 	}
-	Implementation: 2687125900160, "Implementation::openPBR_shader1_Implementation", "" {
+	Implementation: 2686918946976, "Implementation::openPBR_shader1_Implementation", "" {
 		Version: 100
 		Properties70:  {
 			P: "ShaderLanguage", "KString", "", "", "OpenPbrSL"
@@ -419,7 +419,7 @@ Objects:  {
 			P: "RootBindingName", "KString", "", "", "root"
 		}
 	}
-	BindingTable: 2686032577776, "BindingTable::root 5", "" {
+	BindingTable: 2683575033088, "BindingTable::root 13", "" {
 		Version: 100
 		Properties70:  {
 			P: "TargetName", "KString", "", "", "root"
@@ -475,17 +475,17 @@ Objects:  {
 Connections:  {
 	
 	;Model::Wall_Ext_Corner_01a, Model::RootNode
-	C: "OO",2685953245952,0
+	C: "OO",2685953436192,0
 	
 	;Material::openPBR_shader1, Implementation::openPBR_shader1_Implementation
-	C: "OO",2686910128048,2687125900160
+	C: "OO",2686915511440,2686918946976
 	
-	;BindingTable::root 5, Implementation::openPBR_shader1_Implementation
-	C: "OO",2686032577776,2687125900160
+	;BindingTable::root 13, Implementation::openPBR_shader1_Implementation
+	C: "OO",2683575033088,2686918946976
 	
 	;Geometry::, Model::Wall_Ext_Corner_01a
-	C: "OO",2687229969824,2685953245952
+	C: "OO",2687331198944,2685953436192
 	
 	;Material::openPBR_shader1, Model::Wall_Ext_Corner_01a
-	C: "OO",2686910128048,2685953245952
+	C: "OO",2686915511440,2685953436192
 }
