@@ -13,8 +13,10 @@ public class HouseDweller : MonoBehaviour
     {
         m_agent = GetComponent<NavMeshAgent>();
         var rac = FindFirstObjectByType<RacoonMove>();
-        m_player = rac ? rac.gameObject : gameObject;
-        m_target = transform.position;
+        m_player = rac ? rac.transform.parent.gameObject : gameObject;
+        m_target = GetPlayerPos() + Vector3.one.RandomVector(-TESTOFFSET, TESTOFFSET);
+        m_target.y = 0;
+        TellMeWereToGo(m_target);
     }
 
     // Update is called once per frame
