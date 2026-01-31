@@ -17,6 +17,6 @@ public class CameraFollow : MonoBehaviour
     {
         // Apply the basic offsets to the camera
         transform.rotation = m_rotation;
-        transform.position = m_offset + m_target.transform.position;
+        transform.position = m_target.transform.position;
     }
 }
