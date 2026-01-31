@@ -1,0 +1,9 @@
+<Actions>
+	<Action name="move_kitchen" target="KitchenSink" actiontype="moveto"/>
+	<Action name="move_bed" target="Bed" actiontype="moveto"/>
+	<Action name="move_sofa" target="sofa" actiontype="moveto"/>
+	<Action name="sleep_bed" target="Bed" actiontype="animation"/>
+</Actions>
+<!-- TEMPLATE
+	<Action name="" target="" type=""/>
+-->

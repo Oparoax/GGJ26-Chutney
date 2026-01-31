@@ -5,16 +5,17 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private GameObject m_target;
     private Vector3 m_offset;
     private Quaternion m_rotation;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
+        // Setup basic offsets based on camera position in scene
         m_offset = transform.position;
         m_rotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Apply the basic offsets to the camera
         transform.rotation = m_rotation;
         transform.position = m_offset + m_target.transform.position;
     }
