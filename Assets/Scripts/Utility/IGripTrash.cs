@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IGripTrash : IGripper
+public class IGripTrash : GripAndThrowable
 {
     [SerializeField] [Range(0.01f, 1.0f)] private float grabSpeed = 0.2f;
     [SerializeField] [Range(0.01f, 1.0f)] private float grabScaleSpeed = 0.2f;
@@ -11,7 +11,6 @@ public class IGripTrash : IGripper
     [SerializeField] private Vector3 finalScale;
 
     [SerializeField] private SphereCollider modelCollider;
-    [SerializeField] private Rigidbody _rb;
 
     [SerializeField] private float mass = 1f;
     
@@ -63,7 +62,7 @@ public class IGripTrash : IGripper
             interactCollider.enabled = false;
             modelCollider.enabled = false;
         
-            _rb.isKinematic = true;
+            Rb.isKinematic = true;
 
             // Grab time at grab for timer
             timeAtGrab = Time.time;
@@ -74,38 +73,53 @@ public class IGripTrash : IGripper
     {
         if (!_isGrabbed)
         {
-            // Grab object
-            _isGrabbed = true;
-        
-            // Get Player for location data
-            _parent = parent;
-            
-            // Disable collisions & physics
-            interactCollider.enabled = false;
-            modelCollider.enabled = false;
-        
-            _rb.isKinematic = true; 
-            
-            // Snap trash to the location of the racoons hands.
-            gameObject.transform.SetParent(_parent.transform);
-            gameObject.transform.localPosition = Vector3.zero;
+            ConnectToParent(parent);
         }
         else
         {
-            // Drop Object
-            _isGrabbed = false;
-            
-            interactCollider.enabled = true;
-            modelCollider.enabled = true;
-        
-            _rb.isKinematic = false; 
-            
-            gameObject.transform.SetParent(null);
-            
-            _rb.linearVelocity = _parent.gameObject.GetComponent<Rigidbody>().linearVelocity;
-            
-            _parent = null;
+            DisconnectFromParent();
         }
         
+    }
+    
+    public override void Throw(Vector3 throwDirection, float throwForce)
+    {
+        DisconnectFromParent();
+        
+        base.Throw(throwDirection, throwForce);
+    }
+
+    private void ConnectToParent(GameObject parent)
+    {
+        // Grab object
+        _isGrabbed = true;
+        
+        // Get Player for location data
+        _parent = parent;
+            
+        // Disable collisions & physics
+        interactCollider.enabled = false;
+        modelCollider.enabled = false;
+        
+        Rb.isKinematic = true; 
+            
+        // Snap trash to the location of the racoons hands.
+        gameObject.transform.SetParent(_parent.transform);
+        gameObject.transform.localPosition = Vector3.zero;
+    }
+
+    private void DisconnectFromParent()
+    {
+        // Drop Object
+        _isGrabbed = false;
+            
+        interactCollider.enabled = true;
+        modelCollider.enabled = true;
+        
+        Rb.isKinematic = false; 
+            
+        gameObject.transform.SetParent(null);
+            
+        _parent = null;
     }
 }

@@ -10,13 +10,21 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private InputActionAsset playerActions;
     
     [SerializeField] private TrashCollector trashCollector;
+
+    [SerializeField] private float walkSpeedMod = 0.75f;
+    [SerializeField] private float crawlSpeedMod = 1f;
     
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float turnSpeed = 5f;
+    
+    [SerializeField] private float throwForce = 5f;
+    [SerializeField] private Transform throwForceDirection;
     
     // Input actions
     private InputAction _move;
+    private InputAction _sprint;
     private InputAction _grab;
     private InputAction _swipe;
+    private InputAction _throw;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,11 +36,13 @@ public class RacoonMove : MonoBehaviour
         
         // Map input action maps.
         _move = playerActions.FindAction("Player/Move");
+        _sprint = playerActions.FindAction("Player/Sprint");
         _grab = playerActions.FindAction("Player/Grab");
         _swipe = playerActions.FindAction("Player/Swipe");
+        _throw = playerActions.FindAction("Player/Throw");
 
         // Check all maps are valid.
-        if (_move == null || _grab == null || _swipe == null)
+        if (_move == null || _grab == null || _swipe == null || _sprint == null || _throw == null)
         {
             Debug.LogError("Where the fuck are my input actions!");
         }
@@ -43,13 +53,20 @@ public class RacoonMove : MonoBehaviour
     {
         if (_move.IsPressed())
         {
+            var speedMod = walkSpeedMod;
+            
+            if (_sprint.IsPressed())
+            {
+                speedMod = crawlSpeedMod;
+            }
+            
             Vector2 inputValue = _move.ReadValue<Vector2>();
             Vector3 direction = new Vector3(inputValue.x, 0, inputValue.y);
             
-            rb.AddForce(direction.normalized * speed, ForceMode.Impulse);
+            rb.AddForce(direction.normalized * speedMod, ForceMode.Impulse);
             
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
-            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * 5f);
+            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
         }
 
         if (_grab.WasPressedThisFrame())
@@ -61,6 +78,12 @@ public class RacoonMove : MonoBehaviour
         if (_swipe.WasPressedThisFrame())
         {
             Debug.Log("Swipe");
+        }
+
+        if (_throw.WasPressedThisFrame())
+        {
+            Debug.Log("Throw");
+            trashCollector.Throw(throwForceDirection.forward, throwForce);
         }
     }
 }

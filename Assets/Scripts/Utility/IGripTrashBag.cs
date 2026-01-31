@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IGripTrashBag : IGripper
+public class IGripTrashBag : GripAndThrowable
 {
     public override void Action(GameObject parent)
     {
