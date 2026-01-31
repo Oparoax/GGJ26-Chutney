@@ -34,6 +34,7 @@ public class ScheduleManager : MonoBehaviour
 
     public void Update()
     {
+        m_currentTime = TimeManager.x.CurrentTimePercent;
         UpdateSchedules();
     }
 
@@ -62,13 +63,13 @@ public class ScheduleManager : MonoBehaviour
 
     private void PairAgentsToObject()
     {
-        foreach(XMLAgent agent in m_scheduleXML.m_agents)
+        foreach (XMLAgent agent in m_scheduleXML.m_agents)
         {
             m_agentMap.Add(agent.m_name, new List<ScheduledAgent>());
         }
-        foreach(ScheduledAgent agent in m_npcs)
+        foreach (ScheduledAgent agent in m_npcs)
         {
-            if(m_agentMap.ContainsKey(agent.Name))
+            if (m_agentMap.ContainsKey(agent.Name))
                 m_agentMap[agent.Name].Add(agent);
         }
     }
@@ -78,7 +79,7 @@ public class ScheduleManager : MonoBehaviour
         // Collect all possible Ownable Objects referenced
         for (int i = 0; i < m_npcs.Length; i++)
         {
-            for(int j = 0; j < m_npcs[i].OwnedObjects.Length; j++)
+            for (int j = 0; j < m_npcs[i].OwnedObjects.Length; j++)
             {
                 OwnableObject objectToAdd = m_npcs[i].OwnedObjects[j].GetComponent<OwnableObject>();
                 if (objectToAdd)
@@ -94,9 +95,20 @@ public class ScheduleManager : MonoBehaviour
     private void UpdateSchedules()
     {
         foreach (XMLAgent agent in m_scheduleXML.m_agents)
+        {
+            List<XMLEntry> validEntires = new List<XMLEntry>();
             foreach (XMLEntry entry in agent.m_entries)
-                if (Mathf.Approximately(entry.m_startTime, TimeManager.x.CurrentTimePercent))
-                    BuildSchedule(entry, agent.m_name);
+            {
+                bool timeSimil = m_currentTime >= entry.m_startTime;
+                if (timeSimil)
+                {
+                    validEntires.Add(entry);
+                }
+            }
+            if (validEntires.Count <= 0)
+                continue;
+            BuildSchedule(validEntires[validEntires.Count-1], agent.m_name);
+        }
     }
 
     private ScheduleActions GetActionParams(string actionName)
@@ -111,8 +123,8 @@ public class ScheduleManager : MonoBehaviour
 
     private OwnableObject GetTarget(string ownername, string targetname)
     {
-        foreach(OwnableObject target in m_ownedObjects[ownername])
-            if(target.name == targetname)
+        foreach (OwnableObject target in m_ownedObjects[ownername])
+            if (target.name == targetname)
                 return target;
         return null;
     }
@@ -123,9 +135,14 @@ public class ScheduleManager : MonoBehaviour
         ScheduleActions action = GetActionParams(entryaction.m_name);
         OwnableObject target = GetTarget(ownerName, action.m_target);
         foreach (ScheduledAgent agent in m_agentMap[ownerName])
-            if(!agent.IsActing)
+        {
+            if (!agent.IsActing)
+            {
+                Debug.Log(entryaction.m_name);
                 GetAppropriateSchedule(agent, action.m_type, target);
-            
+            }
+        }
+
     }
 
     private void GetAppropriateSchedule(ScheduledAgent agent, ActionType functionType, OwnableObject target)

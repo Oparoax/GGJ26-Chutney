@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IGripper : MonoBehaviour
 {
-    [SerializeField] protected SphereCollider interactCollider;
+    [SerializeField] protected Collider interactCollider;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

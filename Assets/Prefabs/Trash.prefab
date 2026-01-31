@@ -124,12 +124,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactCollider: {fileID: 2688422678931544124}
-  grabSpeed: 0.1
-  grabScaleSpeed: 0.1
+  grabSpeed: 0.05
+  grabScaleSpeed: 0.05
   maxTime: 1
-  finalScale: {x: 0.01, y: 0.01, z: 0.01}
+  finalScale: {x: 0.05, y: 0.05, z: 0.05}
   modelCollider: {fileID: 1880989739351456035}
-  _rb: {fileID: 302768202921309031}
   mass: 1
 --- !u!54 &302768202921309031
 Rigidbody:
