@@ -21,7 +21,7 @@
                     "id": "fbcc4c31-bff7-40f9-8a3a-893070e1bf22",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 },
                 {
@@ -30,7 +30,7 @@
                     "id": "82569746-9777-4016-bb24-3d0bcb2ab79c",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "initialStateCheck": false
                 }
             ],
