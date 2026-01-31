@@ -17,7 +17,7 @@ public class IGripTrash : GripAndThrowable
     private bool _isCollected;
     private bool _isGrabbed;
     
-    private GameObject _collector;
+    private Transform _collector;
     private GameObject _parent;
 
     private float timeAtGrab;
@@ -27,7 +27,7 @@ public class IGripTrash : GripAndThrowable
         if (_isCollected)
         {
             // Lerp scale and position towards the player.
-            transform.position = Vector3.Lerp(transform.position, transform.TransformDirection(_collector.transform.position), grabSpeed);
+            transform.position = Vector3.Lerp(transform.position, _collector.position, grabSpeed);
             transform.localScale = Vector3.Lerp(transform.localScale, finalScale, grabScaleSpeed);
 
             // Trash will despawn after a set timer.
@@ -36,37 +36,31 @@ public class IGripTrash : GripAndThrowable
                 // Once close enough to the player send a ui signal and kill the object.
                 
                 // TODO: FIRE UI SIGNAL
-                
+                _collector = null;
                 _isCollected = false;
                 Destroy(gameObject);
             }
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void Collected(Transform collector)
     {
-        if (_isGrabbed)
-        {
-            return;
-        }
+        Debug.Log("Collected!");
+                
+        // Activate loop
+        _isCollected = true;
         
-        if (other.CompareTag("TrashBag"))
-        {
-            // Activate loop
-            _isCollected = true;
-        
-            // Get Player for location data
-            _collector = other.gameObject;
+        // Get Player for location data
+        _collector = collector;
 
-            // Disable collisions & physics
-            interactCollider.enabled = false;
-            modelCollider.enabled = false;
+        // Disable collisions & physics
+        interactCollider.enabled = false;
+        modelCollider.enabled = false;
         
-            Rb.isKinematic = true;
+        Rb.isKinematic = true;
 
-            // Grab time at grab for timer
-            timeAtGrab = Time.time;
-        }
+        // Grab time at grab for timer
+        timeAtGrab = Time.time;
     }
 
     public override void Action(GameObject parent)
@@ -79,7 +73,6 @@ public class IGripTrash : GripAndThrowable
         {
             DisconnectFromParent();
         }
-        
     }
     
     public override void Throw(Vector3 throwDirection, float throwForce)
