@@ -34,6 +34,7 @@ public class ScheduleManager : MonoBehaviour
 
     public void Update()
     {
+        m_currentTime = TimeManager.x.CurrentTimePercent;
         UpdateSchedules();
     }
 
@@ -95,7 +96,7 @@ public class ScheduleManager : MonoBehaviour
     {
         foreach (XMLAgent agent in m_scheduleXML.m_agents)
             foreach (XMLEntry entry in agent.m_entries)
-                if (Mathf.Approximately(entry.m_startTime, TimeManager.x.CurrentTimePercent))
+                if (Mathf.Approximately(entry.m_startTime, m_currentTime))
                     BuildSchedule(entry, agent.m_name);
     }
 
@@ -130,9 +131,11 @@ public class ScheduleManager : MonoBehaviour
 
     private void GetAppropriateSchedule(ScheduledAgent agent, ActionType functionType, OwnableObject target)
     {
+        Debug.Log("Getting Schedule!");
         switch (functionType)
         {
             case ActionType.moveto:
+                Debug.Log("We moveto");
                 agent.UpdateSchedules((OwnableObject) => agent.MoveTo(target));
                 break;
             case ActionType.animation:

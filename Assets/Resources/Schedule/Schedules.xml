@@ -1,11 +1,6 @@
 <Schedules>
 	<Agent name="Father">
-		<Entry name="Patrol" starttime="0" entrytype="weightedrandom">
-			<Action name="move_bed" weight="0.25"/>
-			<Action name="move_sofa" weight="0.25"/>
-			<Action name="move_kitchen" weight="0.25"/>
-		</Entry>
-		<Entry name="sleep" starttime="0.1" entrytype="sequence">
+		<Entry name="sleep" starttime="0" entrytype="sequence">
 			<Action name="move_bed" weight="0"/>
 			<Action name="sleep_bed" weight="0"/>
 		</Entry>

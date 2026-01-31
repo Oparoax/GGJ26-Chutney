@@ -14,8 +14,8 @@ public class StateTesting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_label.text = m_agent.CurrentAgentName;
-        m_label.transform.position = Camera.main.WorldToScreenPoint(m_target.transform.position);
+        m_label.text = m_agent.CurrentAgentName ?? "None";
+        //m_label.transform.position = Camera.main.WorldToScreenPoint(m_target.transform.position);
     }
 
 
