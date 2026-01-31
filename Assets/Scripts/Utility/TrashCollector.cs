@@ -8,7 +8,9 @@ public class TrashCollector : MonoBehaviour
     
     [SerializeField] private GameObject trashBagPlacedPrefab;
     [SerializeField] private Transform trashBagSpawn;
+    
     [SerializeField] private GameObject trashBagThrownPrefab;
+    [SerializeField] private Transform trashBagThrownSpawn;
     
     [SerializeField] private GameObject trashParent;
     
@@ -64,18 +66,17 @@ public class TrashCollector : MonoBehaviour
     {
         if (isGripping)
         {
-            gripTarget.Throw(throwDirection, throwForce);
             isGripping = false;
             
             if (isGrippingTrashBag)
             {
                 trashBagOnModel.SetActive(false);
-                var trashBag = Instantiate(trashBagThrownPrefab, trashBagSpawn.position, Quaternion.identity);
+                var trashBag = Instantiate(trashBagThrownPrefab, trashBagThrownSpawn.position, Quaternion.identity);
 
                 try
                 {
                     var trashBagRB =  trashBag.GetComponent<Rigidbody>();
-                    trashBagRB.AddForce(throwDirection * throwForce);
+                    trashBagRB.AddForce(throwDirection.normalized * throwForce, ForceMode.Impulse);
                 }
                 catch (Exception e)
                 {
@@ -84,6 +85,10 @@ public class TrashCollector : MonoBehaviour
                 }
                 
                 isGrippingTrashBag = false;
+            }
+            else
+            {
+                gripTarget.Throw(throwDirection, throwForce);
             }
         }
     }

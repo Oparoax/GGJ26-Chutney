@@ -9,6 +9,7 @@ public class TrashInFlight : MonoBehaviour
         if (other.CompareTag("Floor"))
         {
             Instantiate(_placedTrashBag, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }

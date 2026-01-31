@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8613987448858868006}
   - component: {fileID: 8884184426329823942}
   - component: {fileID: 9072910387784752063}
+  - component: {fileID: 5978057530302442006}
   m_Layer: 0
   m_Name: ThrownTrashBag
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1655408667916245543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.049, y: 0, z: -0.096}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4371716775631917175}
@@ -68,6 +69,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placedTrashBag: {fileID: 6350776257420796688, guid: ddca04c79267da546af7688c60e1d5ce, type: 3}
+--- !u!54 &5978057530302442006
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655408667916245543}
+  serializedVersion: 4
+  m_Mass: 3.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5372739826731391381
 GameObject:
   m_ObjectHideFlags: 0

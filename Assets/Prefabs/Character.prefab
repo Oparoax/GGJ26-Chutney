@@ -55,6 +55,37 @@ CapsuleCollider:
   m_Height: 0.66
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &881747999123077690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2297781860664541215}
+  m_Layer: 0
+  m_Name: TrashBagThrownSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2297781860664541215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881747999123077690}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4044475482029502027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2674934143947250723
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 2674934143947250723}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.787}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.787}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -266,6 +297,7 @@ Transform:
   - {fileID: 8973759637320547588}
   - {fileID: 5021851271086242394}
   - {fileID: 4591988928961963150}
+  - {fileID: 2297781860664541215}
   m_Father: {fileID: 2996028475132839923}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7441804733671954878
@@ -371,6 +403,7 @@ MonoBehaviour:
   trashBagPlacedPrefab: {fileID: 6350776257420796688, guid: ddca04c79267da546af7688c60e1d5ce, type: 3}
   trashBagSpawn: {fileID: 4591988928961963150}
   trashBagThrownPrefab: {fileID: 1655408667916245543, guid: 2efc5aacf860b4d48ae79db7c39afd00, type: 3}
+  trashBagThrownSpawn: {fileID: 2297781860664541215}
   trashParent: {fileID: 4294736652554094388}
   grabWindow: 0.5
 --- !u!1 &7981284630660778189
@@ -391,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8752325403572817233
 Transform:
   m_ObjectHideFlags: 0
