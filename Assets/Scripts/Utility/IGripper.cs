@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class IGripper : MonoBehaviour
 {
-    [SerializeField] private SphereCollider interactCollider;
+    [SerializeField] protected SphereCollider interactCollider;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,14 +14,6 @@ public class IGripper : MonoBehaviour
 
         StartChild();
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         Action(other);
-    //     }
-    // }
     
     // Pass through for start method?
     protected virtual void StartChild(){}
