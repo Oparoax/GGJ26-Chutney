@@ -14,7 +14,6 @@ public class ScheduledAgent : AgentBase
 
     public override void ProcessBehaviour()
     {
-        Debug.Log("Moving towards target");
         if (m_currentBehaviour != null)
             m_currentBehaviour(m_target);
     }
