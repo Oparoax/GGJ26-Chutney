@@ -123,7 +123,8 @@ public class ScheduleManager : MonoBehaviour
         ScheduleActions action = GetActionParams(entryaction.m_name);
         OwnableObject target = GetTarget(ownerName, action.m_target);
         foreach (ScheduledAgent agent in m_agentMap[ownerName])
-            GetAppropriateSchedule(agent, action.m_type, target);
+            if(!agent.IsActing)
+                GetAppropriateSchedule(agent, action.m_type, target);
             
     }
 

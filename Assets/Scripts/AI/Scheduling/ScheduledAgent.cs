@@ -1,25 +1,20 @@
 using UnityEngine;
 
-public class ScheduledAgent : MonoBehaviour
+public class ScheduledAgent : AgentBase
 {
     [SerializeField] private string m_agentName;
     protected float m_movementSpeed;
     [SerializeField] protected GameObject[] m_ownedObjects;
     protected Schedule m_currentBehaviour;
     [SerializeField] protected OwnableObject m_target;
-    protected Rigidbody rb;
-    private int m_sequence;
     private bool m_acting;
+    public bool IsActing => m_acting;
     public GameObject[] OwnedObjects => m_ownedObjects;
     public string Name => m_agentName;
 
-    private void Start()
+    public override void ProcessBehaviour()
     {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    private void Update()
-    {
+        Debug.Log("Moving towards target");
         if (m_currentBehaviour != null)
             m_currentBehaviour(m_target);
     }
@@ -33,11 +28,27 @@ public class ScheduledAgent : MonoBehaviour
 
     public void MoveTo(OwnableObject target)
     {
-        Debug.Log($"Running MoveTo Action from {m_agentName}");
+        m_navigationagent.SetDestination(target.transform.position);
+        m_acting = Vector3.Distance(transform.position, target.transform.position) > 2f;
     }
 
     public void EnableDisable(OwnableObject target)
     {
 
+    }
+
+    public override bool ShouldEnter()
+    {
+        return m_acting;
+    }
+
+    public override void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override bool ShouldTransition()
+    {
+        throw new System.NotImplementedException();
     }
 }
