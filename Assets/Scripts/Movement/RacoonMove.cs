@@ -5,7 +5,7 @@ public class RacoonMove : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject model;
-    [SerializeField] private BoxCollider grabColl;
+    [SerializeField] private GameObject grabBox;
     
     [SerializeField] private InputActionAsset playerActions;
     
@@ -24,7 +24,7 @@ public class RacoonMove : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
         
-        grabColl.enabled = false;
+        grabBox.SetActive(false);
         
         _move = playerActions.FindAction("Player/Move");
         _grab = playerActions.FindAction("Player/Grab");
@@ -54,7 +54,8 @@ public class RacoonMove : MonoBehaviour
         {
             Debug.Log("Grab");
             
-            grabColl.enabled = true;
+            grabBox.SetActive(true);
+            
             //play animation for grabbing
         }
 
