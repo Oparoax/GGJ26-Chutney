@@ -3,16 +3,18 @@ using UnityEngine.InputSystem;
 
 public class RacoonMove : MonoBehaviour
 {
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject model;
+    [SerializeField] private BoxCollider grabColl;
+    
+    [SerializeField] private InputActionAsset playerActions;
+    
+    [SerializeField] private float speed = 1f;
+    
     // Input actions
     private InputAction _move;
     private InputAction _grab;
     private InputAction _swipe;
-    
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private GameObject model;
-    [SerializeField] private InputActionAsset playerActions;
-    
-    [SerializeField] private float speed = 1f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,8 @@ public class RacoonMove : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+        
+        grabColl.enabled = false;
         
         _move = playerActions.FindAction("Player/Move");
         _grab = playerActions.FindAction("Player/Grab");
@@ -49,6 +53,9 @@ public class RacoonMove : MonoBehaviour
         if (_grab.IsPressed())
         {
             Debug.Log("Grab");
+            
+            grabColl.enabled = true;
+            //play animation for grabbing
         }
 
         if (_swipe.IsPressed())
