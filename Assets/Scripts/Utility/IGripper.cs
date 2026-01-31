@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ITrashable : MonoBehaviour
+public class IGripper : MonoBehaviour
 {
     [SerializeField] private SphereCollider interactCollider;
     
@@ -11,16 +11,21 @@ public class ITrashable : MonoBehaviour
         {
             Debug.LogError("ITrashable: Where is my interact collider, huh!");
         }
+
+        StartChild();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            Action(other);
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         Action(other);
+    //     }
+    // }
+    
+    // Pass through for start method?
+    protected virtual void StartChild(){}
 
     // Inherited, to be overidden
-    protected void Action(Collider other) {}
+    public virtual void Action(Collider other) {}
 }
