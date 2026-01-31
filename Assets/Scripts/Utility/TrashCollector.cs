@@ -11,7 +11,7 @@ public class TrashCollector : MonoBehaviour
     
     private BoxCollider _grabBox;
     
-    private IGripper gripTarget;
+    private GripAndThrowable gripTarget;
 
     private bool isGripping;
     private bool canGrab;
@@ -39,6 +39,14 @@ public class TrashCollector : MonoBehaviour
         }
     }
 
+    public void Throw(Vector3 throwDirection, float throwForce)
+    {
+        if (isGripping)
+        {
+            gripTarget.Throw(throwDirection, throwForce);
+            isGripping = false;
+        }
+    }
 
     private IEnumerator waitForGrab(float seconds)
     {
