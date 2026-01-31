@@ -7,9 +7,9 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject grabBox;
     
-    [SerializeField] private Animator anim;
-    
     [SerializeField] private InputActionAsset playerActions;
+    
+    [SerializeField] private TrashCollector trashCollector;
     
     [SerializeField] private float speed = 1f;
     
@@ -21,17 +21,10 @@ public class RacoonMove : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (anim == null)
-        {
-            anim = GetComponent<Animator>();
-        }
-        
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
         }
-        
-        grabBox.SetActive(false);
         
         // Map input action maps.
         _move = playerActions.FindAction("Player/Move");
@@ -62,7 +55,7 @@ public class RacoonMove : MonoBehaviour
         if (_grab.WasPressedThisFrame())
         {
             Debug.Log("Grab");
-            anim.SetTrigger("Grab");
+            trashCollector.Grab();
         }
         
         if (_swipe.WasPressedThisFrame())
