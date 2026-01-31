@@ -4,5 +4,8 @@
 			<Action name="move_bed" weight="0"/>
 			<Action name="sleep_bed" weight="0"/>
 		</Entry>
+		<Entry name="cook" starttime="0.001" entrytype="sequence">
+			<Action name="move_kitchen" weight="0"/>
+		</Entry>
 	</Agent>
 </Schedules>
