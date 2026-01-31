@@ -29,7 +29,6 @@ public class HuntingAgent : AgentBase
 
     public override void ProcessBehaviour()
     {
-        Debug.Log("Should be moving towards player");
         m_navigationagent.SetDestination(m_target.transform.position);
     }
 
