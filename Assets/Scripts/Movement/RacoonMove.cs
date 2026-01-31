@@ -62,7 +62,6 @@ public class RacoonMove : MonoBehaviour
         if (_grab.WasPressedThisFrame())
         {
             Debug.Log("Grab");
-            
             anim.SetTrigger("Grab");
         }
         
