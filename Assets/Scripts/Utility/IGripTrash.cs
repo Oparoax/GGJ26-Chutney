@@ -15,17 +15,20 @@ public class IGripTrash : IGripper
 
     [SerializeField] private float mass = 1f;
     
-    private bool _isGripped;
-    private GameObject _gripper;
+    private bool _isCollected;
+    private bool _isGrabbed;
+    
+    private GameObject _collector;
+    private GameObject _parent;
 
     private float timeAtGrab;
 
     private void Update()
     {
-        if (_isGripped)
+        if (_isCollected)
         {
             // Lerp scale and position towards the player.
-            transform.position = Vector3.Lerp(transform.position, transform.TransformDirection(_gripper.transform.position), grabSpeed);
+            transform.position = Vector3.Lerp(transform.position, transform.TransformDirection(_collector.transform.position), grabSpeed);
             transform.localScale = Vector3.Lerp(transform.localScale, finalScale, grabScaleSpeed);
 
             // Trash will despawn after a set timer.
@@ -35,27 +38,74 @@ public class IGripTrash : IGripper
                 
                 // TODO: FIRE UI SIGNAL
                 
-                _isGripped = false;
+                _isCollected = false;
                 Destroy(gameObject);
             }
         }
     }
 
-    public override void Action(GameObject player)
+    public void OnTriggerEnter(Collider other)
     {
-        // Activate loop
-        _isGripped = true;
+        if (_isGrabbed)
+        {
+            return;
+        }
         
-        // Get Player for location data
-        _gripper = player;
-
-        // Disable collisions & physics
-        interactCollider.enabled = false;
-        modelCollider.enabled = false;
+        if (other.CompareTag("TrashBag"))
+        {
+            // Activate loop
+            _isCollected = true;
         
-        _rb.isKinematic = true;
+            // Get Player for location data
+            _collector = other.gameObject;
 
-        // Grab time at grab for timer
-        timeAtGrab = Time.time;
+            // Disable collisions & physics
+            interactCollider.enabled = false;
+            modelCollider.enabled = false;
+        
+            _rb.isKinematic = true;
+
+            // Grab time at grab for timer
+            timeAtGrab = Time.time;
+        }
+    }
+
+    public override void Action(GameObject parent)
+    {
+        if (!_isGrabbed)
+        {
+            // Grab object
+            _isGrabbed = true;
+        
+            // Get Player for location data
+            _parent = parent;
+            
+            // Disable collisions & physics
+            interactCollider.enabled = false;
+            modelCollider.enabled = false;
+        
+            _rb.isKinematic = true; 
+            
+            // Snap trash to the location of the racoons hands.
+            gameObject.transform.SetParent(_parent.transform);
+            gameObject.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            // Drop Object
+            _isGrabbed = false;
+            
+            interactCollider.enabled = true;
+            modelCollider.enabled = true;
+        
+            _rb.isKinematic = false; 
+            
+            gameObject.transform.SetParent(null);
+            
+            _rb.linearVelocity = _parent.gameObject.GetComponent<Rigidbody>().linearVelocity;
+            
+            _parent = null;
+        }
+        
     }
 }
