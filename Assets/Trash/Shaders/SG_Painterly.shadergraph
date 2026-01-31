@@ -5820,7 +5820,7 @@
     "m_DefaultRefNameVersion": 1,
     "m_RefNameGeneratedByDisplayName": "UV Adjust",
     "m_DefaultReferenceName": "_UV_Adjust",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_UV_Adj",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
