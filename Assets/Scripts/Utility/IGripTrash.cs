@@ -8,7 +8,7 @@ public class IGripTrash : IGripper
 
     [SerializeField] private Vector3 finalScale;
     
-    [SerializeField] SphereCollider worldCollider;
+    [SerializeField] SphereCollider modelCollider;
 
     [SerializeField] private float mass = 1f;
     
@@ -17,9 +17,9 @@ public class IGripTrash : IGripper
     
     protected override void StartChild()
     {
-        if (worldCollider == null)
+        if (modelCollider == null)
         {
-            worldCollider =  GetComponent<SphereCollider>();
+            modelCollider =  GetComponent<SphereCollider>();
         }
     }
 
@@ -41,9 +41,9 @@ public class IGripTrash : IGripper
         }
     }
 
-    public override void Action(Collider other)
+    public override void Action(GameObject player)
     {
         isGripped = true;
-        gripper = other.gameObject;
+        gripper = player;
     }
 }

@@ -27,5 +27,5 @@ public class IGripper : MonoBehaviour
     protected virtual void StartChild(){}
 
     // Inherited, to be overidden
-    public virtual void Action(Collider other) {}
+    public virtual void Action(GameObject other) {}
 }
