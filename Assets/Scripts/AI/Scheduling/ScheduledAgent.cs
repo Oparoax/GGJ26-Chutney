@@ -38,7 +38,7 @@ public class ScheduledAgent : AgentBase
 
     public override bool ShouldEnter()
     {
-        return m_acting;
+        return true;
     }
 
     public override void Enter()
