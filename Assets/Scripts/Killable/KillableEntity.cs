@@ -1,10 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class KillableEntity : MonoBehaviour, IKillable
 {
-    public void FuckingDie()
+    public IEnumerator FuckingDie(float delay)
     {
+        Debug.Log("You should die");
+        for (float i = 0; i < delay; i += Time.deltaTime)
+            yield return null;
         SceneManager.LoadScene("GameOver");
     }
 
