@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1cccdbff2ad0e854ea0da52cac737eab
+guid: c990d4d6e2fac3a4ba223489a0bd1aa2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,9 +31,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: raccoon_run
-      takeName: raccoon_run
-      internalID: 4996542692833949441
+      name: raccoon_rig02
+      takeName: raccoon_rig02
+      internalID: 7731225129798852552
       firstFrame: 1
       lastFrame: 75
       wrapMode: 0
@@ -118,15 +118,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: Root
+    rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 98751e8eabf909d47bc15bf31caf9d85, type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 2
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
