@@ -34,9 +34,9 @@ public class IGripTrash : GripAndThrowable
             if (Time.time - timeAtGrab > maxTime)
             {
                 // Once close enough to the player send a ui signal and kill the object.
-                
+
                 // TODO: FIRE UI SIGNAL
-                
+                Notify<float>(RummageEvents.collected, mass);
                 Destroy(gameObject);
             }
         }
