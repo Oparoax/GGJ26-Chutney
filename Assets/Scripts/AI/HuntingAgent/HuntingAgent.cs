@@ -41,7 +41,7 @@ public class HuntingAgent : AgentBase
         {
             if(col.transform.root != null && col.transform.root.GetComponent<KillableEntity>() && !m_playerCaught)
             {
-                StartCoroutine(col.transform.root.GetComponent<KillableEntity>().FuckingDie(1f));
+                StartCoroutine(col.transform.root.GetComponent<KillableEntity>().FuckingDie(0.2f));
                 m_playerCaught = true;
             }
         }
@@ -73,8 +73,4 @@ public class HuntingAgent : AgentBase
         return false;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(transform.position - (Vector3.up * 0.5f), KILLDIST);
-    }
 }
