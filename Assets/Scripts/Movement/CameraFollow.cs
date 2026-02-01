@@ -9,14 +9,14 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         // Setup basic offsets based on camera position in scene
-        m_offset = transform.position;
-        m_rotation = transform.rotation;
+        m_offset = transform.position - m_target.transform.position;
+        //m_rotation = transform.rotation;
     }
 
     void Update()
     {
         // Apply the basic offsets to the camera
-        transform.rotation = m_rotation;
+        //transform.rotation = m_rotation;
         transform.position = m_target.transform.position + m_offset;
     }
 }

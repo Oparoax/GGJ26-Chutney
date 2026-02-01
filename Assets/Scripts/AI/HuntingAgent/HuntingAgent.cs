@@ -5,6 +5,7 @@ public class HuntingAgent : AgentBase
 {
     private GameObject m_target;
     private const float SEARCHDIST = 5f;
+    private const float KILLDIST = 2f;
 
     public override void Enter()
     {
@@ -16,7 +17,7 @@ public class HuntingAgent : AgentBase
         GameObject tar = LocatePlayer();
         if(!tar)
             return false;
-        if(!PlayerNearby(tar.transform.position))
+        if(!PlayerSearch(tar.transform.position, SEARCHDIST))
             return false;
         m_target = tar;
         return true;
@@ -32,9 +33,9 @@ public class HuntingAgent : AgentBase
         m_navigationagent.SetDestination(m_target.transform.position);
     }
 
-    private bool PlayerNearby(Vector3 playerPos)
+    private bool PlayerSearch(Vector3 playerPos, float dist)
     {
-        return Vector3.Distance(transform.position, playerPos) < SEARCHDIST;
+        return Vector3.Distance(transform.position, playerPos) < dist;
     }
 
     private GameObject LocatePlayer()
@@ -49,7 +50,7 @@ public class HuntingAgent : AgentBase
     {
         if (!m_target)
             return false;
-        if (Vector3.Distance(m_target.transform.position, transform.position) <= 5f)
+        if (PlayerSearch(m_target.transform.position, KILLDIST))
         {
             if (m_target.GetComponent<KillableEntity>())
             {
@@ -57,7 +58,7 @@ public class HuntingAgent : AgentBase
             }
             return true;
         }
-        if (!PlayerNearby(m_target.transform.position))
+        if (!PlayerSearch(m_target.transform.position, SEARCHDIST))
             return true;
         return false;
     }
