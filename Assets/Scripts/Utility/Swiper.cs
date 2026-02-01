@@ -18,7 +18,7 @@ public class Swiper : MonoBehaviour
         if (other.CompareTag("Trash"))
         {
             var otherRB =  other.GetComponent<Rigidbody>();
-            otherRB.AddForce(,ForceMode.Impulse);
+            //otherRB.AddForce( ,ForceMode.Impulse);
         }
     }
 }
