@@ -14,6 +14,7 @@ public class RacoonMove : KillableEntity
     
     [SerializeField] private TrashCollector trashCollector;
     [SerializeField] private Swiper swiper;
+    [SerializeField] private ParticleSystem thwack;
     
     [SerializeField] private float walkSpeedMod = 0.75f;
     [SerializeField] private float runSpeedMod = 1f;
@@ -126,7 +127,9 @@ public class RacoonMove : KillableEntity
             if (_swipe.WasPressedThisFrame())
             {
                 Debug.Log("Swipe");
+                trashCollector.Drop();
                 swiper.Swipe();
+                thwack.Play();
             }
 
             if (_throw.WasPressedThisFrame())
