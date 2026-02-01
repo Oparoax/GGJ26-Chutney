@@ -39,7 +39,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764147042956638800}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0183a01462a8df9459ced4994ae0f282, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 5924003001906659397}
   m_Layer: 0
   m_Name: SM_Stairs_6m_01a
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6688496585303640879}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 0183a01462a8df9459ced4994ae0f282, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

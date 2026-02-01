@@ -2,11 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RacoonMove : MonoBehaviour
+public class RacoonMove : KillableEntity
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject grabBox;
+
+    [SerializeField] private GameObject playerCamera;
     
     [SerializeField] private InputActionAsset playerActions;
     
@@ -92,7 +94,12 @@ public class RacoonMove : MonoBehaviour
             }
             
             Vector2 inputValue = _move.ReadValue<Vector2>();
-            Vector3 direction = new Vector3(inputValue.x, 0, inputValue.y);
+            Vector3 direction = new Vector3(inputValue.x , 0, inputValue.y);
+
+            Vector3 forwardMov = direction.z * playerCamera.transform.forward;
+            Vector3 rightMov = direction.x * playerCamera.transform.right;
+            
+            direction = forwardMov + rightMov;
             
             rb.AddForce(direction.normalized * speedMod, ForceMode.Impulse);
             
