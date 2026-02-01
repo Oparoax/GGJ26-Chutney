@@ -50,7 +50,11 @@ MonoBehaviour:
   trashAmount: 3
   trashForce: 6
   trashExplodeDirection: {fileID: 5320243740605787089}
-  trashPrefab: {fileID: 95767315792780120, guid: c3872859c353bd142bceb126510ed4f6, type: 3}
+  trashPrefabs:
+  - {fileID: 2560852910864158673, guid: 2758a00d082aae742a30a87e83aa5bf4, type: 3}
+  - {fileID: 5189498250946955741, guid: e2f76ae03c577994088937746707148b, type: 3}
+  - {fileID: 4655912474911985986, guid: 04039e6041df5be42af7e4993c0a0522, type: 3}
+  - {fileID: 4344584696549219693, guid: 34eb5c128e1422a42b32478b6ee4e4c3, type: 3}
   binLid: {fileID: 7861387998988879518}
 --- !u!135 &7116351299435309287
 SphereCollider:

@@ -6,7 +6,7 @@ public class Bin : MonoBehaviour
     [SerializeField] private float trashForce;
     [SerializeField] private Transform trashExplodeDirection;
     
-    [SerializeField] private GameObject trashPrefab;
+    [SerializeField] private GameObject[] trashPrefabs;
     [SerializeField] private GameObject binLid;
         
     private Rigidbody rb;
@@ -33,7 +33,8 @@ public class Bin : MonoBehaviour
         
             for (int i = 0; i < trashAmount; i++)
             {
-                var trash = Instantiate(trashPrefab, trashExplodeDirection.position, trashExplodeDirection.rotation);
+                var trashToBeSent = trashPrefabs[Random.Range(0, trashPrefabs.Length - 1)];
+                var trash = Instantiate(trashToBeSent, trashExplodeDirection.position, trashExplodeDirection.rotation);
                 var trashRb = trash.GetComponent<Rigidbody>();
             
                 trashRb.AddForce(trashExplodeDirection.transform.forward * trashForce, ForceMode.Impulse);
