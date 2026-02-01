@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 public interface IKillable
 {
     public GameObject GetGameObject();
-    public void FuckingDie();
+    public IEnumerator FuckingDie(float delay);
 }

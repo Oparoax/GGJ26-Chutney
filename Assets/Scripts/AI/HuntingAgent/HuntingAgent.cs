@@ -49,8 +49,14 @@ public class HuntingAgent : AgentBase
     {
         if (!m_target)
             return false;
-        if (Vector3.Distance(m_target.transform.position, transform.position) <= 2f)
+        if (Vector3.Distance(m_target.transform.position, transform.position) <= 5f)
+        {
+            if (m_target.GetComponent<KillableEntity>())
+            {
+                m_target.GetComponent<KillableEntity>().FuckingDie(5f);
+            }
             return true;
+        }
         if (!PlayerNearby(m_target.transform.position))
             return true;
         return false;
