@@ -7,6 +7,7 @@ TagManager:
   - Trash
   - TrashBag
   - Floor
+  - Bin
   layers:
   - Default
   - TransparentFX

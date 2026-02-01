@@ -39,10 +39,17 @@ public class Swiper : MonoBehaviour
         {
             if (other.CompareTag("Trash"))
             {
+                Debug.Log("Trash Swiped");
                 var otherRb =  other.GetComponent<Rigidbody>();
                 var launchDir = other.gameObject.transform.position - gameObject.transform.position;
             
                 otherRb.AddForce(launchDir.normalized *  LaunchForce,ForceMode.Impulse);
+            }
+            else if (other.CompareTag("Bin"))
+            {
+                Debug.Log("Bin-Splode");
+                var bin = other.GetComponent<Bin>();
+                bin.Explode();
             }
         }
     }
