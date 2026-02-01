@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,9 +11,10 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private InputActionAsset playerActions;
     
     [SerializeField] private TrashCollector trashCollector;
+    [SerializeField] private Swiper swiper;
     
     [SerializeField] private float walkSpeedMod = 0.75f;
-    [SerializeField] private float crawlSpeedMod = 1f;
+    [SerializeField] private float runSpeedMod = 1f;
     
     [SerializeField] private float turnSpeed = 5f;
     
@@ -20,6 +22,11 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private Transform throwForceDirection;
     
     [SerializeField] private Animator animator;
+
+    [SerializeField] private float _maxRunSpeed;
+    [SerializeField] private float _maxWalkSpeed;
+    
+    [SerializeField] private float speed;
     
     // Input actions
     private InputAction _move;
@@ -31,7 +38,7 @@ public class RacoonMove : MonoBehaviour
     private string _moveAnimParam = "IsMoving";
     private string _sprintAnimParam = "IsSprinting";
 
-    private bool _isSprinting;
+    private bool _isRunning;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -68,16 +75,19 @@ public class RacoonMove : MonoBehaviour
             animator.SetBool(_moveAnimParam, true);
             
             var speedMod = walkSpeedMod;
+            var maxSpeed = _maxWalkSpeed;
             
             if (_sprint.IsPressed())
             {
-                _isSprinting = true;
+                _isRunning = true;
                 animator.SetBool(_sprintAnimParam, true);
-                speedMod = crawlSpeedMod;
+                
+                speedMod = runSpeedMod;
+                maxSpeed = _maxRunSpeed;
             }
             else
             {
-                _isSprinting = false;
+                _isRunning = false;
                 animator.SetBool(_sprintAnimParam, false);
             }
             
@@ -88,13 +98,17 @@ public class RacoonMove : MonoBehaviour
             
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
             model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+            
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+            
+            speed = rb.linearVelocity.magnitude;
         }
         else
         {
             animator.SetBool(_moveAnimParam, false);
         }
 
-        if (!_isSprinting)
+        if (!_isRunning)
         {
             if (_grab.WasPressedThisFrame())
             {
@@ -105,6 +119,7 @@ public class RacoonMove : MonoBehaviour
             if (_swipe.WasPressedThisFrame())
             {
                 Debug.Log("Swipe");
+                swiper.Swipe();
             }
 
             if (_throw.WasPressedThisFrame())

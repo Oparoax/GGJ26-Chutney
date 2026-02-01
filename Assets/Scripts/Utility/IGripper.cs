@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IGripper : MonoBehaviour
+public class IGripper : Subject
 {
     [SerializeField] protected Collider interactCollider;
     
