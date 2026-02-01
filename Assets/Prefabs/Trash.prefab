@@ -128,7 +128,7 @@ MonoBehaviour:
   grabScaleSpeed: 0.05
   maxTime: 1
   finalScale: {x: 0.05, y: 0.05, z: 0.05}
-  modelCollider: {fileID: 1880989739351456035}
+  modelCollider: {fileID: 9181591335726446831}
   mass: 1
 --- !u!54 &302768202921309031
 Rigidbody:
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5950557541825015176}
-  - component: {fileID: 1880989739351456035}
+  - component: {fileID: 9181591335726446831}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -189,8 +189,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8351917694862448073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1880989739351456035
-SphereCollider:
+--- !u!65 &9181591335726446831
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -208,5 +208,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
