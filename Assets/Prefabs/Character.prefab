@@ -200,6 +200,7 @@ MonoBehaviour:
   grabBox: {fileID: 7933010049894362205}
   playerActions: {fileID: -944628639613478452, guid: c8715a25145068140906df3348f01fd0, type: 3}
   trashCollector: {fileID: 7698492862312989438}
+  swiper: {fileID: 9147945138720345656}
   walkSpeedMod: 1
   runSpeedMod: 1
   turnSpeed: 7
@@ -263,7 +264,7 @@ Transform:
   m_GameObject: {fileID: 5530409583690404701}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0.6}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0.238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,8 +289,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.2, z: 0.4}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4, y: 0.2, z: 0.3}
+  m_Center: {x: 0, y: 0, z: 0.15}
 --- !u!114 &9147945138720345656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ea81ce473629e4bafabc1e9fba7e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LaunchForce: 3
+  SwipeDuration: 0.5
 --- !u!1 &6567405630164930104
 GameObject:
   m_ObjectHideFlags: 0

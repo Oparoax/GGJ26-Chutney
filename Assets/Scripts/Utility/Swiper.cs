@@ -1,8 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class Swiper : MonoBehaviour
 {
-    Rigidbody _rb;
+    [SerializeField] private float LaunchForce = 5f;
+    [SerializeField] private float SwipeDuration = 0.5f;
+    
+    private Rigidbody _rb;
+    private bool canSwipe;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,12 +19,31 @@ public class Swiper : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Swipe()
     {
-        if (other.CompareTag("Trash"))
+        StartCoroutine(SwipeTime(SwipeDuration));
+    }
+
+    private IEnumerator SwipeTime(float duration)
+    {
+        canSwipe = true;
+        
+        yield return new WaitForSeconds(duration);
+        
+        canSwipe = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (canSwipe)
         {
-            var otherRB =  other.GetComponent<Rigidbody>();
-            //otherRB.AddForce( ,ForceMode.Impulse);
+            if (other.CompareTag("Trash"))
+            {
+                var otherRb =  other.GetComponent<Rigidbody>();
+                var launchDir = other.gameObject.transform.position - gameObject.transform.position;
+            
+                otherRb.AddForce(launchDir.normalized *  LaunchForce,ForceMode.Impulse);
+            }
         }
     }
 }

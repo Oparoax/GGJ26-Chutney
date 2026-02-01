@@ -11,6 +11,7 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private InputActionAsset playerActions;
     
     [SerializeField] private TrashCollector trashCollector;
+    [SerializeField] private Swiper swiper;
     
     [SerializeField] private float walkSpeedMod = 0.75f;
     [SerializeField] private float runSpeedMod = 1f;
@@ -118,6 +119,7 @@ public class RacoonMove : MonoBehaviour
             if (_swipe.WasPressedThisFrame())
             {
                 Debug.Log("Swipe");
+                swiper.Swipe();
             }
 
             if (_throw.WasPressedThisFrame())
