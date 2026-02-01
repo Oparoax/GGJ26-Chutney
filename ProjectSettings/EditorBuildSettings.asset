@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Blockout.unity
     guid: f11d499d61ea5194f8fa9ca2e278c81b
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 992bbe45569da97438206c7cb4e83093
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c8715a25145068140906df3348f01fd0, type: 3}
   m_UseUCBPForAssetBundles: 0
