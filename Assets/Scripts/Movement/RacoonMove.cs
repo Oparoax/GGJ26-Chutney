@@ -19,6 +19,8 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private float throwForce = 5f;
     [SerializeField] private Transform throwForceDirection;
     
+    [SerializeField] private Animator animator;
+    
     // Input actions
     private InputAction _move;
     private InputAction _sprint;
@@ -26,6 +28,8 @@ public class RacoonMove : MonoBehaviour
     private InputAction _swipe;
     private InputAction _throw;
     
+    private string _moveAnimParam = "IsMoving";
+    private string _sprintAnimParam = "IsSprinting";
 
     private bool _isSprinting;
     
@@ -37,6 +41,10 @@ public class RacoonMove : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         }
         
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         
         // Map input action maps.
         _move = playerActions.FindAction("Player/Move");
@@ -57,16 +65,20 @@ public class RacoonMove : MonoBehaviour
     {
         if (_move.IsPressed())
         {
+            animator.SetBool(_moveAnimParam, true);
+            
             var speedMod = walkSpeedMod;
             
             if (_sprint.IsPressed())
             {
                 _isSprinting = true;
+                animator.SetBool(_sprintAnimParam, true);
                 speedMod = crawlSpeedMod;
             }
             else
             {
                 _isSprinting = false;
+                animator.SetBool(_sprintAnimParam, false);
             }
             
             Vector2 inputValue = _move.ReadValue<Vector2>();
