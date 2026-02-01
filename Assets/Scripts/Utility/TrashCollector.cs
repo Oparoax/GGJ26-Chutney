@@ -33,6 +33,18 @@ public class TrashCollector : MonoBehaviour
         }
     }
 
+    public void GrabToggle()
+    {
+        if (isGripping)
+        {
+            Drop();
+        }
+        else
+        {
+            Grab();
+        }
+    }
+
     public void Grab()
     {
         if (!isGripping)
@@ -40,10 +52,14 @@ public class TrashCollector : MonoBehaviour
             Debug.Log("Grabbing");
             StartCoroutine(waitForGrab(grabWindow));
         }
-        else if (isGripping)
-        {
-            Debug.Log("Drop");
+    }
 
+    public void Drop()
+    {
+        if (isGripping)
+        {
+            Debug.Log("Dropping");
+            
             if (gripTarget != null)
             {
                 gripTarget.Action(null);
@@ -58,7 +74,6 @@ public class TrashCollector : MonoBehaviour
                 Instantiate(trashBagPlacedPrefab, trashBagSpawn.position, Quaternion.identity);
                 isGrippingTrashBag = false;
             }
-            
         }
     }
 

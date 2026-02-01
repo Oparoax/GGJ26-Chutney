@@ -10,7 +10,7 @@ public class RacoonMove : MonoBehaviour
     [SerializeField] private InputActionAsset playerActions;
     
     [SerializeField] private TrashCollector trashCollector;
-
+    
     [SerializeField] private float walkSpeedMod = 0.75f;
     [SerializeField] private float crawlSpeedMod = 1f;
     
@@ -26,6 +26,9 @@ public class RacoonMove : MonoBehaviour
     private InputAction _swipe;
     private InputAction _throw;
     
+
+    private bool _isSprinting;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +36,7 @@ public class RacoonMove : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+        
         
         // Map input action maps.
         _move = playerActions.FindAction("Player/Move");
@@ -57,7 +61,12 @@ public class RacoonMove : MonoBehaviour
             
             if (_sprint.IsPressed())
             {
+                _isSprinting = true;
                 speedMod = crawlSpeedMod;
+            }
+            else
+            {
+                _isSprinting = false;
             }
             
             Vector2 inputValue = _move.ReadValue<Vector2>();
@@ -68,22 +77,33 @@ public class RacoonMove : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
             model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
         }
-
-        if (_grab.WasPressedThisFrame())
+        else
         {
-            Debug.Log("Grab");
-            trashCollector.Grab();
+            animator.SetBool(_moveAnimParam, false);
         }
+
+        if (!_isSprinting)
+        {
+            if (_grab.WasPressedThisFrame())
+            {
+                Debug.Log("Grab");
+                trashCollector.GrabToggle();
+            }
         
-        if (_swipe.WasPressedThisFrame())
-        {
-            Debug.Log("Swipe");
-        }
+            if (_swipe.WasPressedThisFrame())
+            {
+                Debug.Log("Swipe");
+            }
 
-        if (_throw.WasPressedThisFrame())
+            if (_throw.WasPressedThisFrame())
+            {
+                Debug.Log("Throw");
+                trashCollector.Throw(throwForceDirection.forward, throwForce);
+            }
+        }
+        else
         {
-            Debug.Log("Throw");
-            trashCollector.Throw(throwForceDirection.forward, throwForce);
+            trashCollector.Drop();
         }
     }
 }

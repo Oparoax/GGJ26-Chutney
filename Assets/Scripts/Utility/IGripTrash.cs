@@ -10,14 +10,14 @@ public class IGripTrash : GripAndThrowable
 
     [SerializeField] private Vector3 finalScale;
 
-    [SerializeField] private SphereCollider modelCollider;
+    [SerializeField] private Collider modelCollider;
 
     [SerializeField] private float mass = 1f;
     
     private bool _isCollected;
     private bool _isGrabbed;
     
-    private Transform _collector;
+    private Vector3 _collector;
     private GameObject _parent;
 
     private float timeAtGrab;
@@ -27,7 +27,7 @@ public class IGripTrash : GripAndThrowable
         if (_isCollected)
         {
             // Lerp scale and position towards the player.
-            transform.position = Vector3.Lerp(transform.position, _collector.position, grabSpeed);
+            transform.position = Vector3.Lerp(transform.position, _collector, grabSpeed);
             transform.localScale = Vector3.Lerp(transform.localScale, finalScale, grabScaleSpeed);
 
             // Trash will despawn after a set timer.
@@ -36,8 +36,7 @@ public class IGripTrash : GripAndThrowable
                 // Once close enough to the player send a ui signal and kill the object.
                 
                 // TODO: FIRE UI SIGNAL
-                _collector = null;
-                _isCollected = false;
+                
                 Destroy(gameObject);
             }
         }
@@ -51,7 +50,7 @@ public class IGripTrash : GripAndThrowable
         _isCollected = true;
         
         // Get Player for location data
-        _collector = collector;
+        _collector = collector.position;
 
         // Disable collisions & physics
         interactCollider.enabled = false;
