@@ -14,6 +14,7 @@ public class RacoonMove : KillableEntity
     
     [SerializeField] private TrashCollector trashCollector;
     [SerializeField] private Swiper swiper;
+    [SerializeField] private ParticleSystem thwack;
     
     [SerializeField] private float walkSpeedMod = 0.75f;
     [SerializeField] private float runSpeedMod = 1f;
@@ -72,49 +73,6 @@ public class RacoonMove : KillableEntity
     // Update is called once per frame
     void Update()
     {
-        if (_move.IsPressed())
-        {
-            animator.SetBool(_moveAnimParam, true);
-            
-            var speedMod = walkSpeedMod;
-            var maxSpeed = _maxWalkSpeed;
-            
-            if (_sprint.IsPressed())
-            {
-                _isRunning = true;
-                animator.SetBool(_sprintAnimParam, true);
-                
-                speedMod = runSpeedMod;
-                maxSpeed = _maxRunSpeed;
-            }
-            else
-            {
-                _isRunning = false;
-                animator.SetBool(_sprintAnimParam, false);
-            }
-            
-            Vector2 inputValue = _move.ReadValue<Vector2>();
-            Vector3 direction = new Vector3(inputValue.x , 0, inputValue.y);
-
-            Vector3 forwardMov = direction.z * playerCamera.transform.forward;
-            Vector3 rightMov = direction.x * playerCamera.transform.right;
-            
-            direction = forwardMov + rightMov;
-            
-            rb.AddForce(direction.normalized * speedMod, ForceMode.Impulse);
-            
-            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
-            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
-            
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
-            
-            speed = rb.linearVelocity.magnitude;
-        }
-        else
-        {
-            animator.SetBool(_moveAnimParam, false);
-        }
-
         if (!_isRunning)
         {
             if (_grab.WasPressedThisFrame())
@@ -126,7 +84,9 @@ public class RacoonMove : KillableEntity
             if (_swipe.WasPressedThisFrame())
             {
                 Debug.Log("Swipe");
+                trashCollector.Drop();
                 swiper.Swipe();
+                thwack.Play();
             }
 
             if (_throw.WasPressedThisFrame())
@@ -138,6 +98,51 @@ public class RacoonMove : KillableEntity
         else
         {
             trashCollector.Drop();
+        }
+    }
+    public void FixedUpdate()
+    {
+        if (_move.IsPressed())
+        {
+            animator.SetBool(_moveAnimParam, true);
+
+            var speedMod = walkSpeedMod;
+            var maxSpeed = _maxWalkSpeed;
+
+            if (_sprint.IsPressed())
+            {
+                _isRunning = true;
+                animator.SetBool(_sprintAnimParam, true);
+
+                speedMod = runSpeedMod;
+                maxSpeed = _maxRunSpeed;
+            }
+            else
+            {
+                _isRunning = false;
+                animator.SetBool(_sprintAnimParam, false);
+            }
+
+            Vector2 inputValue = _move.ReadValue<Vector2>();
+            Vector3 direction = new Vector3(inputValue.x, 0, inputValue.y);
+
+            Vector3 forwardMov = direction.z * playerCamera.transform.forward;
+            Vector3 rightMov = direction.x * playerCamera.transform.right;
+
+            direction = forwardMov + rightMov;
+
+            rb.AddForce(direction.normalized * speedMod, ForceMode.Impulse);
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
+            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+
+            speed = rb.linearVelocity.magnitude;
+        }
+        else
+        {
+            animator.SetBool(_moveAnimParam, false);
         }
     }
 }

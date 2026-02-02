@@ -5,8 +5,8 @@ public class HuntingAgent : AgentBase
 {
     private GameObject m_target;
     private const float SEARCHDIST = 5f;
-    private const float KILLDIST = 2f;
-
+    private const float KILLDIST = 0.5f;
+    private bool m_playerCaught = false;
     public override void Enter()
     {
         
@@ -31,6 +31,20 @@ public class HuntingAgent : AgentBase
     public override void ProcessBehaviour()
     {
         m_navigationagent.SetDestination(m_target.transform.position);
+        OverlapTime();
+    }
+
+    private void OverlapTime()
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position - (Vector3.up*0.5f), KILLDIST);
+        foreach(Collider col in cols)
+        {
+            if(col.transform.root != null && col.transform.root.GetComponent<KillableEntity>() && !m_playerCaught)
+            {
+                StartCoroutine(col.transform.root.GetComponent<KillableEntity>().FuckingDie(0.2f));
+                m_playerCaught = true;
+            }
+        }
     }
 
     private bool PlayerSearch(Vector3 playerPos, float dist)
@@ -50,16 +64,13 @@ public class HuntingAgent : AgentBase
     {
         if (!m_target)
             return false;
-        if (PlayerSearch(m_target.transform.position, KILLDIST))
-        {
-            if (m_target.GetComponent<KillableEntity>())
-            {
-                m_target.GetComponent<KillableEntity>().FuckingDie(5f);
-            }
+        Debug.Log("Searching for KillDistance");
+        Debug.Log($"{Vector3.Distance(transform.position, m_target.transform.position)}");
+        if (m_playerCaught)
             return true;
-        }
         if (!PlayerSearch(m_target.transform.position, SEARCHDIST))
             return true;
         return false;
     }
+
 }

@@ -101,6 +101,7 @@ Material:
     - _Colour_Contrast: 0.08
     - _Cull: 2
     - _Cutoff: 0.5
+    - _Cutoff_Disable: 1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
